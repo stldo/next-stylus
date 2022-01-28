@@ -1,0 +1,24 @@
+{
+  "name": "next-stylus",
+  "version": "0.0.1",
+  "description": "Adds Stylus support to Next.js",
+  "repository": "https://github.com/stldo/next-stylus",
+  "keywords": [
+    "next.js",
+    "nextjs",
+    "next",
+    "plugin",
+    "next-plugin",
+    "stylus",
+    "css"
+  ],
+  "main": "index.js",
+  "types": "index.d.ts",
+  "peerDependencies": {
+    "next": "^12.0.0",
+    "stylus": "^0.56.0",
+    "stylus-loader": "^6.2.0"
+  },
+  "author": "stldo (https://github.com/stldo)",
+  "license": "MIT"
+}
