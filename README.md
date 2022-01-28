@@ -1,6 +1,6 @@
 # next-stylus [![npm][1]][2]
 
-Adds [Stylus][3] support to Next.js.
+Add [Stylus][3] support to Next.js.
 
 ## Installation
 
