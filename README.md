@@ -10,7 +10,7 @@ npm install next-stylus stylus stylus-loader
 
 ## Usage
 
-### `next-with-plugins`
+### With [next-with-plugins][4]
 
 ```js
 /* next.config.js */
@@ -29,9 +29,9 @@ module.exports = withPlugins({
 ```js
 /* next.config.js */
 
-const withSylus = require('next-stylus')
+const withStylus = require('next-stylus')
 
-module.exports = withSylus({
+module.exports = withStylus({
   /* Next.js config options here */
 })
 ```
@@ -53,4 +53,5 @@ Add a reference to this module in a declaration file.
 [1]: https://img.shields.io/npm/v/next-stylus
 [2]: https://www.npmjs.com/package/next-stylus
 [3]: https://github.com/stylus/stylus
+[4]: https://github.com/stldo/next-with-plugins
 [license]: ./LICENSE
