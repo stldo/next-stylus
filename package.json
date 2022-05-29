@@ -27,8 +27,8 @@
   },
   "peerDependencies": {
     "next": "^12.0.0",
-    "stylus": "^0.56.0",
-    "stylus-loader": "^6.2.0"
+    "stylus": "*",
+    "stylus-loader": "*"
   },
   "author": "stldo (https://github.com/stldo)",
   "license": "MIT"
