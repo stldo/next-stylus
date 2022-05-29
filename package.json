@@ -1,6 +1,6 @@
 {
   "name": "next-stylus",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Add Stylus support to Next.js",
   "repository": "https://github.com/stldo/next-stylus",
   "keywords": [
