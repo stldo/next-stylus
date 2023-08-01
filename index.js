@@ -64,47 +64,49 @@ module.exports = config => ({
               rule.test.flags
             ),
 
-            use: rule.use.map(loader => {
-              if (
-                testString === '/\\.module\\.(scss|sass)$/' && // CSS Modules
-                loader.loader.includes('/css-loader/')
-              ) {
-                return {
-                  ...loader,
-                  options: {
-                    ...loader.options,
-                    modules: {
-                      ...loader.options.modules,
-                      getLocalIdent: (
-                        { resourcePath, rootContext },
-                        _,
-                        localName
-                      ) => {
-                        const relativePath = relative(rootContext, resourcePath)
+            use: rule.use
+              .filter(loader => typeof loader === 'object' && loader.hasOwnProperty('loader'))
+              .map(loader => {
+                if (
+                  testString === '/\\.module\\.(scss|sass)$/' && // CSS Modules
+                  loader.loader.includes('/css-loader/')
+                ) {
+                  return {
+                    ...loader,
+                    options: {
+                      ...loader.options,
+                      modules: {
+                        ...loader.options.modules,
+                        getLocalIdent: (
+                          { resourcePath, rootContext },
+                          _,
+                          localName
+                        ) => {
+                          const relativePath = relative(rootContext, resourcePath)
 
-                        const hash = createHash('md5')
-                          .update(`path:${relativePath}#className:${localName}`)
-                          .digest('base64url')
-                          .slice(0, 5)
+                          const hash = createHash('md5')
+                            .update(`path:${relativePath}#className:${localName}`)
+                            .digest('base64url')
+                            .slice(0, 5)
 
-                        const resourceIdent = (
-                          relativePath.endsWith('/index.module.styl')
-                            ? basename(dirname(relativePath))
-                            : basename(relativePath).slice(0, -12)
-                        ).replace(NOT_LETTER_OR_NUMBER, '_')
+                          const resourceIdent = (
+                            relativePath.endsWith('/index.module.styl')
+                              ? basename(dirname(relativePath))
+                              : basename(relativePath).slice(0, -12)
+                          ).replace(NOT_LETTER_OR_NUMBER, '_')
 
-                        return `${resourceIdent}_${localName}__${hash}`
+                          return `${resourceIdent}_${localName}__${hash}`
+                        }
                       }
                     }
                   }
+                } else if (loader.loader.includes('/sass-loader/')) {
+                  /* Replace sass-loader with stylus-loader. */
+                  return 'stylus-loader'
                 }
-              } else if (loader.loader.includes('/sass-loader/')) {
-                /* Replace sass-loader with stylus-loader. */
-                return 'stylus-loader'
-              }
 
-              return loader
-            })
+                return loader
+              })
           })
         } else if (Array.isArray(rule.test)) {
           for (let index = 0; index < rule.test.length; index++) {
