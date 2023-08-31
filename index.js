@@ -65,9 +65,14 @@ module.exports = config => ({
             ),
 
             use: rule.use.map(loader => {
+              // Regexes for matching loader paths in Windows and Unix
+              // Unix: /css-loader/, Windows: \css-loader\
+              const cssTest = /[\\/]css-loader[\\/]/
+              const sassTest = /[\\/]sass-loader[\\/]/
+
               if (
                 testString === '/\\.module\\.(scss|sass)$/' && // CSS Modules
-                loader.loader.includes('/css-loader/')
+                cssTest.test(loader.loader)
               ) {
                 return {
                   ...loader,
@@ -98,7 +103,7 @@ module.exports = config => ({
                     }
                   }
                 }
-              } else if (loader.loader.includes('/sass-loader/')) {
+              } else if (sassTest.test(loader.loader)) {
                 /* Replace sass-loader with stylus-loader. */
                 return 'stylus-loader'
               }
