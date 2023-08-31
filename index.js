@@ -93,7 +93,7 @@ module.exports = config => ({
                           .slice(0, 5)
 
                         const resourceIdent = (
-                          relativePath.endsWith('/index.module.styl')
+                          /[\\/]index.module.styl$/.test(relativePath)
                             ? basename(dirname(relativePath))
                             : basename(relativePath).slice(0, -12)
                         ).replace(NOT_LETTER_OR_NUMBER, '_')
